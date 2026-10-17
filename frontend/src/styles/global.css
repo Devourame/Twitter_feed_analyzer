@@ -1,0 +1,96 @@
+/* ============================================================
+   Design system tokens — dark analytics theme.
+   Every component consumes these variables; nothing hardcodes
+   colors or spacing below this file.
+   ============================================================ */
+:root {
+  /* Surfaces */
+  --bg-root: #0b0f17;
+  --bg-surface: #131a26;
+  --bg-surface-raised: #1a2333;
+  --bg-surface-hover: #202b3d;
+
+  /* Text */
+  --text-primary: #e8edf5;
+  --text-secondary: #97a3b6;
+  --text-muted: #5d6b80;
+
+  /* Accents */
+  --accent: #22d3ee; /* electric cyan */
+  --accent-strong: #38bdf8;
+  --accent-dim: rgba(34, 211, 238, 0.14);
+
+  /* Sentiment colors (used consistently everywhere) */
+  --sentiment-positive: #34d399;
+  --sentiment-neutral: #94a3b8;
+  --sentiment-negative: #f87171;
+
+  /* Borders & focus */
+  --border: #243044;
+  --border-subtle: #1c2637;
+  --focus-ring: 0 0 0 2px rgba(34, 211, 238, 0.5);
+
+  /* Spacing scale (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  /* Typography */
+  --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Cascadia Code', Consolas, monospace;
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-md: 0.875rem;
+  --text-lg: 1rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+
+  /* Layout */
+  --sidebar-width: 232px;
+  --topbar-height: 56px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--bg-root);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Accessible focus states on all interactive elements */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+::selection {
+  background: var(--accent-dim);
+}

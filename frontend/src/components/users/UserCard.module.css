@@ -1,0 +1,70 @@
+.userCard {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  border-color: transparent;
+  transition: border-color 120ms ease, background 120ms ease;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+.userCard:hover {
+  background: var(--bg-surface-hover);
+  border-color: var(--border);
+}
+
+.userCardSelected {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.displayName {
+  font-weight: 600;
+}
+
+.handle {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.meta {
+  display: flex;
+  gap: var(--space-4);
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  margin-top: 2px;
+}
+
+.followers {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}

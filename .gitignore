@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+sentiment_service/.venv/
+
+# Local model weights (see README-SENTIMENT.md to download)
+models/
+
+# Build outputs
+backend/dist/
+frontend/dist/
+
+# Logs
+*.log
+
+# Env files
+.env

@@ -1,0 +1,138 @@
+.tweetCard {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.tweetHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: var(--text-sm);
+  flex-shrink: 0;
+}
+
+.handleLink {
+  color: var(--text-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.handleLink:hover {
+  color: var(--accent);
+}
+
+.timestamp {
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  margin-left: auto;
+}
+
+.text {
+  margin: 0;
+  color: var(--text-primary);
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.hashtags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.hashtagLink {
+  color: var(--accent-strong);
+  background: var(--accent-dim);
+  text-decoration: none;
+  font-size: var(--text-xs);
+  padding: 2px var(--space-2);
+  border-radius: 999px;
+}
+
+.hashtagLink:hover {
+  text-decoration: underline;
+}
+
+.metrics {
+  display: flex;
+  gap: var(--space-5);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  border-top: 1px solid var(--border-subtle);
+  padding-top: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.metric {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.engagement {
+  margin-left: auto;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.detailToggle {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  padding: var(--space-1) 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.detailToggle:hover {
+  color: var(--accent);
+}
+
+.detailPanel {
+  background: var(--bg-surface-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.detailLabel {
+  color: var(--text-muted);
+}
+
+.detailValue {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Twitter Feed Analyzer</title>
+    <script>
+      window.__errs = [];
+      window.addEventListener('error', function (e) {
+        window.__errs.push('E: ' + e.message + ' @ ' + (e.filename || '') + ':' + e.lineno);
+      });
+      window.addEventListener('unhandledrejection', function (e) {
+        window.__errs.push('P: ' + String((e.reason && (e.reason.stack || e.reason.message)) || e.reason).slice(0, 600));
+      });
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
