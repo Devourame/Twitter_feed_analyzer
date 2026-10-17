@@ -36,6 +36,11 @@ function HistoryItem({ post }: { post: AnalyzedPost }) {
     <li className={styles.historyItem}>
       <div className={styles.historyHeader}>
         <span className={styles.historyTag}>#{post.hashtag}</span>
+        {post.source === 'tweet-explorer' && (
+          <span className={styles.historySource} title={post.sourceTweetId}>
+            From Tweet Explorer ({post.sourceTweetId})
+          </span>
+        )}
         <SentimentBadge sentiment={post.sentiment} />
       </div>
       <p className={styles.historyText}>{post.text}</p>

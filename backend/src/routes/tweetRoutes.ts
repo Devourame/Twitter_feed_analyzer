@@ -23,4 +23,7 @@ router.get(
 // Get single tweet by tweetId
 router.get('/:tweetId', TweetController.getTweetById);
 
+// Fresh Twitter-RoBERTa sentiment analysis of an existing tweet
+router.post('/:tweetId/analyze-sentiment', TweetController.analyzeSentiment);
+
 export default router;

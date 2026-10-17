@@ -9,7 +9,8 @@
     "build": "tsc",
     "seed": "npx ts-node src/scripts/seedDatabase.ts",
     "verify": "npx ts-node src/scripts/verifyDatabase.ts",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand",
+    "seed:topup": "npx ts-node src/scripts/topUpDataset.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",

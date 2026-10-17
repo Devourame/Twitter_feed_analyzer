@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, Repeat2, MessageCircle, ChevronDown, ChevronUp } from 'lucide-react';
 import type { Tweet } from '../../types/api';
-import SentimentBadge from '../common/SentimentBadge';
+import AnalyzeSentiment from './AnalyzeSentiment';
 import { engagementScore } from '../../utils/format';
 import { formatDateTime, formatNumber } from '../../utils/format';
 import styles from './TweetCard.module.css';
@@ -27,7 +27,6 @@ export default function TweetCard({ tweet, detail }: TweetCardProps) {
         <Link to={`/users?handle=${tweet.userHandle}`} className={styles.handleLink}>
           @{tweet.userHandle}
         </Link>
-        {tweet.sentiment && <SentimentBadge sentiment={tweet.sentiment} />}
         <span className={styles.timestamp} title={tweet.createdAt}>
           {formatDateTime(tweet.createdAt)}
         </span>
@@ -62,6 +61,7 @@ export default function TweetCard({ tweet, detail }: TweetCardProps) {
         <span className={styles.engagement} title="likes + 2×retweets + 1.5×replies (project-defined)">
           Score {formatNumber(Math.round(score))}
         </span>
+        <AnalyzeSentiment tweet={tweet} />
       </div>
 
       {detail && (

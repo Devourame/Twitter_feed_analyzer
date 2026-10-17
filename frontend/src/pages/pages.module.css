@@ -525,3 +525,10 @@ a.rankMain:hover {
   font-size: var(--text-xs);
   margin: 0;
 }
+
+.historySource {
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  margin-left: auto;
+  margin-right: var(--space-2);
+}

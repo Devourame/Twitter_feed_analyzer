@@ -148,6 +148,8 @@ export interface SentimentScores {
   positive: number;
 }
 
+export type AnalysisSource = 'sentiment-lab' | 'tweet-explorer';
+
 export interface AnalyzedPost {
   _id: string;
   text: string;
@@ -158,6 +160,22 @@ export interface AnalyzedPost {
   model: string;
   inferenceTimeMs: number;
   createdAt: string;
+  /** Present on Tweet Explorer analyses; legacy Sentiment Lab records omit it. */
+  source?: AnalysisSource;
+  sourceTweetId?: string;
+  sourceUserHandle?: string;
+}
+
+/** POST /api/tweets/:tweetId/analyze-sentiment response. */
+export interface AnalyzeSentimentResponse {
+  success: boolean;
+  data: AnalyzedPost;
+  sourceTweet: {
+    tweetId: string;
+    userHandle: string;
+    /** The tweet's original dataset label — NOT the model prediction. */
+    datasetSentiment: Sentiment;
+  };
 }
 
 export interface AnalyzedPostListResponse {

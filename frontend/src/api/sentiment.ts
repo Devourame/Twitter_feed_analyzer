@@ -2,6 +2,7 @@ import { get, ApiError } from './client';
 import type {
   AnalyzedPost,
   AnalyzedPostListResponse,
+  AnalyzeSentimentResponse,
   SentimentHealthResponse,
 } from '../types/api';
 
@@ -63,4 +64,36 @@ export async function submitPostForAnalysis(
     );
   }
   return (body as AnalyzeResult).data;
+}
+
+/**
+ * POST /api/tweets/:tweetId/analyze-sentiment — ask the backend to run a
+ * fresh local-model prediction on the tweet's stored text and save it.
+ * The backend fetches the text from MongoDB; only the id is sent here.
+ */
+export async function analyzeExistingTweet(
+  tweetId: string,
+  signal?: AbortSignal
+): Promise<AnalyzeSentimentResponse> {
+  let response: Response;
+  try {
+    response = await fetch(
+      `${BASE_URL}/api/tweets/${encodeURIComponent(tweetId)}/analyze-sentiment`,
+      { method: 'POST', headers: { Accept: 'application/json' }, signal }
+    );
+  } catch (err) {
+    if (err instanceof DOMException && err.name === 'AbortError') throw err;
+    throw new ApiError(
+      'Cannot reach the backend. Make sure the API server is running.',
+      0
+    );
+  }
+  const body = await response.json().catch(() => null);
+  if (!response.ok) {
+    throw new ApiError(
+      body?.message ?? `Request failed (HTTP ${response.status})`,
+      response.status
+    );
+  }
+  return body as AnalyzeSentimentResponse;
 }

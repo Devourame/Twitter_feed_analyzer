@@ -1,5 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import { Tweet } from '../models/Tweet';
+import { AnalyzedPost } from '../models/AnalyzedPost';
+import {
+  predictSentiment,
+  SentimentServiceError,
+} from '../services/sentimentService';
 
 /**
  * Controller for tweet-related operations
@@ -203,6 +208,70 @@ export class TweetController {
         }
       });
     } catch (error) {
+      next(error);
+    }
+  }
+
+  /**
+   * POST /api/tweets/:tweetId/analyze-sentiment
+   * Generate a FRESH Twitter-RoBERTa prediction for an existing tweet's
+   * database text and save it to analyzedposts. The tweet's stored
+   * `sentiment` label (dataset label) is never modified or returned as
+   * the prediction.
+   */
+  static async analyzeSentiment(req: Request, res: Response, next: NextFunction) {
+    try {
+      const tweetId = typeof req.params.tweetId === 'string' ? req.params.tweetId.trim() : '';
+      if (!tweetId || tweetId.length > 64) {
+        return res.status(400).json({
+          success: false,
+          message: 'A valid tweet identifier is required.',
+        });
+      }
+
+      // Text comes from the database record, never from the request body.
+      const tweet = await Tweet.findOne({ tweetId }).select('tweetId userHandle text sentiment hashtags');
+      if (!tweet) {
+        return res.status(404).json({
+          success: false,
+          message: `Tweet ${tweetId} not found.`,
+        });
+      }
+
+      // Real inference via the local Python service; validates the response
+      // shape and throws on failure, so nothing is saved for a bad run.
+      const prediction = await predictSentiment(tweet.text);
+
+      const saved = await AnalyzedPost.create({
+        text: tweet.text,
+        hashtag: tweet.hashtags?.length ? tweet.hashtags[0] : 'uncategorized',
+        sentiment: prediction.sentiment,
+        confidence: prediction.confidence,
+        scores: prediction.scores,
+        model: prediction.model,
+        inferenceTimeMs: prediction.inferenceTimeMs,
+        source: 'tweet-explorer',
+        sourceTweetId: tweet.tweetId,
+        sourceUserHandle: tweet.userHandle,
+      });
+
+      res.status(201).json({
+        success: true,
+        data: saved,
+        sourceTweet: {
+          tweetId: tweet.tweetId,
+          userHandle: tweet.userHandle,
+          // Clearly labelled dataset label, NOT the model prediction
+          datasetSentiment: tweet.sentiment,
+        },
+      });
+    } catch (error) {
+      if (error instanceof SentimentServiceError) {
+        return res.status(error.statusCode).json({
+          success: false,
+          message: error.message,
+        });
+      }
       next(error);
     }
   }

@@ -38,10 +38,6 @@ export default function TweetDetail({ tweetId }: { tweetId: string }) {
         </span>
       </div>
       <div className={styles.detailRow}>
-        <span className={styles.detailLabel}>Sentiment</span>
-        <span className={styles.detailValue}>{t.sentiment ?? 'not classified'}</span>
-      </div>
-      <div className={styles.detailRow}>
         <span className={styles.detailLabel}>MongoDB document _id</span>
         <span className={styles.detailValue}>{t._id}</span>
       </div>
